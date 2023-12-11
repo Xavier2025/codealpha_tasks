@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        input, button {
+            padding: 10px;
+            margin: 10px;
+        }
+
+        #tasks {
+            text-align: left;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .task {
+            margin: 8px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .task button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+    <title>To-Do List</title>
+</head>
+<body>
+
+    <h1>To-Do List</h1>
+
+    <input type="text" id="taskInput" placeholder="Enter a new task">
+    <button onclick="addTask()">Add Task</button>
+
+    <div id="tasks"></div>
+
+    <script>
+        function addTask() {
+            var taskInput = document.getElementById("taskInput");
+            var taskText = taskInput.value;
+
+            if (taskText.trim() === "") {
+                alert("Please enter a valid task!");
+                return;
+            }
+
+            var taskContainer = document.getElementById("tasks");
+            var newTask = document.createElement("div");
+            newTask.className = "task";
+
+            newTask.innerHTML = `
+                <span>${taskText}</span>
+                <button onclick="removeTask(this)">Remove</button>
+            `;
+
+            taskContainer.appendChild(newTask);
+            taskInput.value = "";
+        }
+
+        function removeTask(button) {
+            var taskContainer = document.getElementById("tasks");
+            var taskToRemove = button.parentNode;
+            taskContainer.removeChild(taskToRemove);
+        }
+    </script>
+
+</body>
+</html>
